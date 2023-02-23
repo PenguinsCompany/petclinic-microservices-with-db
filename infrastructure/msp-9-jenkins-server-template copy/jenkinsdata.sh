@@ -15,7 +15,7 @@ yum install jenkins -y
 systemctl daemon-reload
 systemctl start jenkins
 systemctl enable jenkins
-# install docker
+# installation docker
 amazon-linux-extras install docker -y
 systemctl start docker
 systemctl enable docker
