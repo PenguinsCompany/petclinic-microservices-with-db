@@ -24,5 +24,5 @@
       AWS_REGION=$AWS_REGION helm repo add stable-petclinic4 s3://petclinic-helm-charts-cmakkaya/stable/myapp/
       AWS_REGION=$AWS_REGION helm repo update
       AWS_REGION=$AWS_REGION helm upgrade --install \
-        petclinic-app-release stable-petclinic/petclinic_chart --version ${BUILD_NUMBER} \
+        petclinic-app-release stable-petclinic4/petclinic_chart --version ${BUILD_NUMBER} \
         --namespace petclinic-dev
