@@ -1,12 +1,28 @@
 version: '3'
 services:
   config-server:
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M
     image: "{{ .Values.IMAGE_TAG_CONFIG_SERVER }}"
     ports:
      - 8888:8888
     labels:
       kompose.image-pull-secret: "regcred"
   discovery-server:
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M
     image: "{{ .Values.IMAGE_TAG_DISCOVERY_SERVER }}"
     ports:
      - 8761:8761
@@ -15,6 +31,13 @@ services:
   customers-service:
     image: "{{ .Values.IMAGE_TAG_CUSTOMERS_SERVICE }}"
     deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M      
       replicas: 2
     ports:
     - 8081:8081
@@ -23,6 +46,13 @@ services:
   visits-service:
     image: "{{ .Values.IMAGE_TAG_VISITS_SERVICE }}"
     deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M
       replicas: 2
     ports:
      - 8082:8082
@@ -31,6 +61,13 @@ services:
   vets-service:
     image: "{{ .Values.IMAGE_TAG_VETS_SERVICE }}"
     deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M
       replicas: 2
     ports:
      - 8083:8083
@@ -39,6 +76,13 @@ services:
   api-gateway:
     image: "{{ .Values.IMAGE_TAG_API_GATEWAY }}"
     deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M
       replicas: 1
     ports:
      - 8080:8080
@@ -48,30 +92,70 @@ services:
       kompose.service.type: "nodeport"
       kompose.service.nodeport.port: "30001"
   tracing-server:
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M
     image: openzipkin/zipkin
     environment:
     - JAVA_OPTS=-XX:+UnlockExperimentalVMOptions -Djava.security.egd=file:/dev/./urandom
     ports:
      - 9411:9411
   admin-server:
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M
     image: "{{ .Values.IMAGE_TAG_ADMIN_SERVER }}"
     ports:
      - 9090:9090
     labels:
       kompose.image-pull-secret: "regcred"
   hystrix-dashboard:
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M
     image: "{{ .Values.IMAGE_TAG_HYSTRIX_DASHBOARD }}"
     ports:
      - 7979:7979
     labels:
       kompose.image-pull-secret: "regcred"
   grafana-server:
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M
     image: "{{ .Values.IMAGE_TAG_GRAFANA_SERVICE }}"
     ports:
     - 3000:3000
     labels:
       kompose.image-pull-secret: "regcred"
   prometheus-server:
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M
     image: "{{ .Values.IMAGE_TAG_PROMETHEUS_SERVICE }}"
     ports:
     - 9091:9090
@@ -79,6 +163,14 @@ services:
       kompose.image-pull-secret: "regcred"
 
   mysql-server:
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M
     image: mysql:5.7.8
     environment: 
       MYSQL_ROOT_PASSWORD: petclinic
