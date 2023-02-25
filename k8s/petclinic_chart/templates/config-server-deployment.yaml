@@ -31,10 +31,6 @@ spec:
           ports:
             - containerPort: 8888
           resources: {}
-      initContainers:
-        - name: init-discovery-server
-          image: busybox
-          command: ['sh', '-c', 'until nc -z discovery-server:8761; do echo waiting for discovery-server; sleep 2; done;']
       imagePullSecrets:
         - name: regcred
       restartPolicy: Always
