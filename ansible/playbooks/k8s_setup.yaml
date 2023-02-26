@@ -18,6 +18,8 @@
       EOF
       sysctl --system
 
+  - name: update apt-get
+    shell: apt-get update
 
   - name: Install packages that allow apt to be used over HTTPS
     apt:
@@ -33,11 +35,9 @@
   - name: update apt-get and install kube packages
     shell: |
       curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - && \
-      echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list && \
-      sudo apt-get update && \
-      sudo apt-get install -y kubelet kubeadm kubectl docker.io && \
-      sudo apt-mark hold kubelet kubeadm kubectl docker.io
-
+      echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list && \
+      apt-get update -q && \
+      apt-get install -qy kubelet=1.23.5-00 kubectl=1.23.5-00 kubeadm=1.23.5-00 docker.io
 
   - name: Add ubuntu to docker group
     user:
