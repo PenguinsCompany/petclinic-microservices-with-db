@@ -15,7 +15,8 @@ pipeline {
                 echo 'Packaging the app into jars with maven'
                 sh ". ./jenkins/package-with-maven-container.sh"
             }
-
+        
+        }
         stage('Create ECR Repo') {
             steps {
                 echo "Creating ECR Repo for ${APP_NAME} app"
@@ -28,8 +29,6 @@ pipeline {
                          --region ${AWS_REGION}
                 '''
             }
-        }
-        
         stage('Prepare Tags for Docker Images') {
             steps {
                 echo 'Preparing Tags for Docker Images'
