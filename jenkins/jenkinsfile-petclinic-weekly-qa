@@ -8,13 +8,28 @@ pipeline {
         AWS_REGION="us-east-1"
         ECR_REGISTRY="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
     }
+    
     stages {
         stage('Package Application') {
             steps {
                 echo 'Packaging the app into jars with maven'
                 sh ". ./jenkins/package-with-maven-container.sh"
             }
+
+        stage('Create ECR Repo') {
+            steps {
+                echo "Creating ECR Repo for ${APP_NAME} app"
+                sh '''
+                aws ecr describe-repositories --region ${AWS_REGION} --repository-name ${APP_REPO_NAME} || \
+                         aws ecr create-repository \
+                         --repository-name ${APP_REPO_NAME} \
+                         --image-scanning-configuration scanOnPush=true \
+                         --image-tag-mutability MUTABLE \
+                         --region ${AWS_REGION}
+                '''
+            }
         }
+        
         stage('Prepare Tags for Docker Images') {
             steps {
                 echo 'Preparing Tags for Docker Images'
