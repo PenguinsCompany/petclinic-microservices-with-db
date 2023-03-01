@@ -68,6 +68,12 @@ pipeline {
                 sh ". ./jenkins/push-qa-docker-images-to-ecr.sh"
             }
         }
+        stage('delete ns'){
+            steps {
+                echo 'delete ns'
+                sh 'kubectl delete ns petclinic-qa'
+            }
+        }        
         stage('Deploy App on Kubernetes Cluster'){
             steps {
                 echo 'Deploying App on Kubernetes Cluster'
