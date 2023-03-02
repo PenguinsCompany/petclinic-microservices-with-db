@@ -1,6 +1,6 @@
 PATH="$PATH:/usr/local/bin:$HOME/bin"
 APP_NAME="petclinic"
-APP_REPO_NAME="clarusway-repo/petclinic-app-qa"
+APP_REPO_NAME="zabraham-repo/petclinic-app-qa"
 AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 export AWS_REGION="us-east-1"
 ECR_REGISTRY="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
