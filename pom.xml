@@ -44,6 +44,7 @@
     </properties>
 
     <dependencyManagement>
+       
         <dependencies>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
@@ -73,6 +74,20 @@
 
         </dependencies>
     </dependencyManagement>
+
+            <distributionManagement>
+            <repository>
+                <id>nexus</id>
+                <name>maven-releases</name>
+                <url>http://172.31.28.197:8081/repository/maven-releases/</url>
+            </repository>
+
+            <snapshotRepository>
+                <id>nexus</id>
+                <name>maven-snapshots</name>
+                <url>http://172.31.28.197:8081/repository/maven-snapshots/</url>
+            </snapshotRepository>
+        </distributionManagement> 
 
     <profiles>
         <profile>
